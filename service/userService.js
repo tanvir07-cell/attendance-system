@@ -26,3 +26,11 @@ module.exports.createNewUser = ({
   const user = new User({ name, email, password, roles, accountStatus });
   return user.save();
 };
+
+module.exports.updateUserByPUT = (id, userInfo) => {
+  return User.findOneAndUpdate(
+    { id },
+    { ...userInfo },
+    { runValidators: true, new: true }
+  );
+};

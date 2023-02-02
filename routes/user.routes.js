@@ -5,7 +5,8 @@ router
   .route("/:id")
   .get(userController.getUserById)
   .delete(userController.deleteUserById)
-  .patch(userController.patchUserById);
+  .patch(userController.patchUserById)
+  .put(userController.putUserById);
 
 router.route("/").get(userController.getAllUser).post(userController.PostUser);
 

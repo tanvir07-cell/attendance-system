@@ -82,3 +82,26 @@ module.exports.patchUserById = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports.putUserById = async (req, res, next) => {
+  try {
+    const { name, roles, accountStatus, email } = req.body;
+    // jei id er data update korte chai sei id er email ti ei jodi abar updated user er email hoy tahole error dibe
+    const user = await userService.findUserByProperty(email);
+    if (user) {
+      throw error("Email already in use", 404);
+    }
+    const updatedUser = await userService.updateUserByPUT(req.params.id, {
+      name,
+      roles,
+      accountStatus,
+      email,
+    });
+    return res.status(200).json({
+      message: "User updated successfully",
+      data: updatedUser,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
