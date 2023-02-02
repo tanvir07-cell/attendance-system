@@ -1,10 +1,11 @@
 const express = require("express");
+const { authentication } = require("./middleware/authentication");
 const app = express();
 
 app.use(express.json());
 require("dotenv").config();
 
-app.use("/api/v1/users", require("./routes/user.routes"));
+app.use("/api/v1/users", authentication, require("./routes/user.routes"));
 app.use("/api/v1/auth", require("./routes/user.authRoutes"));
 app.use("/api/v1", require("./routes/user.private.route"));
 

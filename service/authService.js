@@ -9,7 +9,13 @@ const jwt = require("jsonwebtoken");
 const { findUserByProperty, createNewUser } = require("./userService");
 const { error } = require("../utils/error");
 
-module.exports.registerService = async ({ name, email, password }) => {
+module.exports.registerService = async ({
+  name,
+  email,
+  password,
+  roles,
+  accountStatus,
+}) => {
   // let user = await User.findOne({ email });
   let user = await findUserByProperty(email);
   // jodi ei email diye user already register kora thake:
@@ -23,7 +29,13 @@ module.exports.registerService = async ({ name, email, password }) => {
   var hashPassword = bcrypt.hashSync(password, salt);
 
   // await user.save();
-  return createNewUser({ name, email, password: hashPassword });
+  return createNewUser({
+    name,
+    email,
+    password: hashPassword,
+    roles,
+    accountStatus,
+  });
 };
 
 module.exports.loginService = async ({ email, password }) => {
