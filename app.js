@@ -8,6 +8,12 @@ require("dotenv").config();
 app.use("/api/v1/users", authentication, require("./routes/user.routes"));
 app.use("/api/v1/auth", require("./routes/user.authRoutes"));
 app.use("/api/v1", require("./routes/user.private.route"));
+// for admin attendance model routes:
+app.use(
+  "/api/v1/admin",
+  authentication,
+  require("./routes/adminAttendance.route")
+);
 
 // global error middleware:
 app.use((err, req, res, next) => {
