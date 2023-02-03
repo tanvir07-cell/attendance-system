@@ -3,7 +3,7 @@ const adminAttendanceController = require("../controller/adminAttendance.control
 
 router.get("/enable", adminAttendanceController.getEnable);
 
-router.get("/disable", () => {});
+router.get("/disable", adminAttendanceController.getDisable);
 
 router.get("/status", adminAttendanceController.getStatus);
 
